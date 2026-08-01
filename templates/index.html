@@ -1,0 +1,293 @@
+{% extends "base.html" %}
+{% block title %}NewsClassify | NLP-Powered News Article Classification{% endblock %}
+
+{% block content %}
+
+<!-- ===================== HERO ===================== -->
+<section class="hero-section">
+    <div class="hero-glow"></div>
+    <div class="container">
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-6">
+                <span class="eyebrow"><i class="fa-solid fa-sparkles me-2"></i>NLP + Machine Learning Mini Project</span>
+                <h1 class="hero-title">
+                    Teach a machine to <span class="text-gradient">read the news</span> like a human editor.
+                </h1>
+                <p class="hero-subtitle">
+                    Paste any news article and watch a Natural Language Processing
+                    pipeline clean, tokenize and vectorize the text &mdash; then a
+                    trained Machine Learning model instantly sorts it into
+                    <strong>World</strong>, <strong>Sports</strong>, <strong>Business</strong>
+                    or <strong>Sci/Tech</strong>.
+                </p>
+                <div class="hero-actions">
+                    <a href="{{ url_for('predict_page') }}" class="btn btn-gradient btn-lg">
+                        <i class="fa-solid fa-wand-magic-sparkles me-2"></i>Classify an Article
+                    </a>
+                    <a href="{{ url_for('about') }}" class="btn btn-outline-light btn-lg">
+                        Learn How It Works
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">4</span>
+                        <span class="hero-stat-label">News Categories</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">TF-IDF</span>
+                        <span class="hero-stat-label">Feature Extraction</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-value">2</span>
+                        <span class="hero-stat-label">ML Models Compared</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-visual">
+                    <div class="hero-card floating-card card-top">
+                        <i class="fa-solid fa-earth-americas"></i>
+                        <span>World</span>
+                    </div>
+                    <div class="hero-card floating-card card-right">
+                        <i class="fa-solid fa-futbol"></i>
+                        <span>Sports</span>
+                    </div>
+                    <div class="hero-card floating-card card-bottom">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <span>Business</span>
+                    </div>
+                    <div class="hero-card floating-card card-left">
+                        <i class="fa-solid fa-microchip"></i>
+                        <span>Sci/Tech</span>
+                    </div>
+                    <div class="hero-terminal">
+                        <div class="hero-terminal-bar">
+                            <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+                            <span class="terminal-title">predict.py</span>
+                        </div>
+                        <div class="hero-terminal-body">
+                            <p><span class="tok-comment"># raw article</span></p>
+                            <p><span class="tok-key">text</span> = <span class="tok-str">"Central bank raises rates..."</span></p>
+                            <p><span class="tok-comment"># NLP pipeline</span></p>
+                            <p><span class="tok-fn">clean_text</span>(text) <span class="tok-arrow">&rarr;</span> tfidf <span class="tok-arrow">&rarr;</span> model</p>
+                            <p class="terminal-output">&gt;&gt;&gt; <span class="tok-out">Business</span> <span class="tok-conf">(96.4%)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== ABOUT PROJECT ===================== -->
+<section class="section-block" id="about-project">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-eyebrow">About the Project</span>
+            <h2>Why classify news automatically?</h2>
+            <p class="section-lead">
+                Every day, publishers and aggregators handle thousands of
+                articles. Manually tagging each one by topic is slow and
+                inconsistent. This project demonstrates how NLP and Machine
+                Learning can automate that process reliably and instantly.
+            </p>
+        </div>
+
+        <div class="row gy-4">
+            <div class="col-md-4">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-bullseye"></i></div>
+                    <h5>The Goal</h5>
+                    <p>Automatically predict whether a news article belongs to
+                    World, Sports, Business, or Sci/Tech &mdash; using only its text.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-diagram-project"></i></div>
+                    <h5>The Approach</h5>
+                    <p>Clean raw text with an NLP pipeline, convert it into
+                    numeric TF-IDF features, then classify it with a trained
+                    supervised ML model.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h5>The Outcome</h5>
+                    <p>A lightweight, fully functional web app that shows the
+                    entire text-classification pipeline end-to-end &mdash; from
+                    raw text to prediction.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== WHAT IS NLP ===================== -->
+<section class="section-block section-alt" id="what-is-nlp">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-5">
+                <span class="section-eyebrow">What is NLP?</span>
+                <h2>Natural Language Processing, in plain terms</h2>
+                <p class="section-lead">
+                    Natural Language Processing (NLP) is the branch of
+                    Artificial Intelligence that helps computers understand,
+                    interpret and work with human language &mdash; turning
+                    unstructured text into structured data a Machine Learning
+                    model can actually learn from.
+                </p>
+                <ul class="check-list">
+                    <li><i class="fa-solid fa-circle-check"></i>Cleans messy, real-world text</li>
+                    <li><i class="fa-solid fa-circle-check"></i>Breaks sentences into meaningful tokens</li>
+                    <li><i class="fa-solid fa-circle-check"></i>Reduces words to their root/base form</li>
+                    <li><i class="fa-solid fa-circle-check"></i>Converts words into numeric vectors (TF-IDF)</li>
+                </ul>
+            </div>
+            <div class="col-lg-7">
+                <div class="code-panel">
+                    <div class="code-panel-header">
+                        <i class="fa-solid fa-code"></i> preprocess.py
+                    </div>
+                    <pre class="code-panel-body"><code><span class="tok-key">def</span> <span class="tok-fn">clean_text</span>(text):
+    text = text.<span class="tok-fn">lower</span>()                     <span class="tok-comment"># 1. lowercase</span>
+    text = remove_punctuation(text)         <span class="tok-comment"># 2. punctuation</span>
+    text = remove_numbers(text)             <span class="tok-comment"># 3. numbers</span>
+    text = remove_special_characters(text)  <span class="tok-comment"># 4. special chars</span>
+    tokens = word_tokenize(text)            <span class="tok-comment"># 5. tokenize</span>
+    tokens = remove_stopwords(tokens)       <span class="tok-comment"># 6. stopwords</span>
+    tokens = lemmatize_tokens(tokens)       <span class="tok-comment"># 7. lemmatize</span>
+    <span class="tok-key">return</span> <span class="tok-str">" "</span>.join(tokens)              <span class="tok-comment"># 8. cleanup</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== PROJECT WORKFLOW ===================== -->
+<section class="section-block" id="workflow">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-eyebrow">Project Workflow</span>
+            <h2>From raw article to prediction</h2>
+            <p class="section-lead">Every request travels through the same
+            pipeline that was used to train the model &mdash; guaranteeing
+            consistent, reliable predictions.</p>
+        </div>
+
+        <div class="workflow-track">
+            <div class="workflow-step">
+                <div class="workflow-num">1</div>
+                <i class="fa-solid fa-file-lines"></i>
+                <h6>Raw Article</h6>
+                <p>User pastes or selects a news article</p>
+            </div>
+            <div class="workflow-connector"></div>
+            <div class="workflow-step">
+                <div class="workflow-num">2</div>
+                <i class="fa-solid fa-broom"></i>
+                <h6>NLP Cleaning</h6>
+                <p>Lowercase, tokenize, remove stopwords, lemmatize</p>
+            </div>
+            <div class="workflow-connector"></div>
+            <div class="workflow-step">
+                <div class="workflow-num">3</div>
+                <i class="fa-solid fa-table-cells"></i>
+                <h6>TF-IDF Vectors</h6>
+                <p>Text converted into numeric feature vectors</p>
+            </div>
+            <div class="workflow-connector"></div>
+            <div class="workflow-step">
+                <div class="workflow-num">4</div>
+                <i class="fa-solid fa-brain"></i>
+                <h6>ML Model</h6>
+                <p>Logistic Regression predicts the category</p>
+            </div>
+            <div class="workflow-connector"></div>
+            <div class="workflow-step">
+                <div class="workflow-num">5</div>
+                <i class="fa-solid fa-tags"></i>
+                <h6>Prediction</h6>
+                <p>Category + confidence score returned instantly</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="section-block section-alt" id="features">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-eyebrow">Features</span>
+            <h2>What this app can do</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-sm-6 col-lg-3">
+                <div class="feature-card">
+                    <i class="fa-solid fa-bolt"></i>
+                    <h6>Instant Predictions</h6>
+                    <p>Get a category and confidence score in real time.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="feature-card">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <h6>Fully Responsive</h6>
+                    <p>Looks great on mobile, tablet, laptop and desktop.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="feature-card">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                    <h6>Model Comparison</h6>
+                    <p>Logistic Regression vs. Naive Bayes, benchmarked.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="feature-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h6>Robust Error Handling</h6>
+                    <p>Friendly messages for empty or invalid input.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== TECH STACK ===================== -->
+<section class="section-block" id="tech-stack">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-eyebrow">Technology Stack</span>
+            <h2>Built with a modern, minimal toolkit</h2>
+        </div>
+        <div class="tech-grid">
+            <div class="tech-pill"><i class="fa-brands fa-python"></i>Python 3.11</div>
+            <div class="tech-pill"><i class="fa-solid fa-flask"></i>Flask</div>
+            <div class="tech-pill"><i class="fa-solid fa-language"></i>NLTK</div>
+            <div class="tech-pill"><i class="fa-solid fa-diagram-project"></i>TF-IDF</div>
+            <div class="tech-pill"><i class="fa-solid fa-robot"></i>Scikit-Learn</div>
+            <div class="tech-pill"><i class="fa-solid fa-table"></i>Pandas</div>
+            <div class="tech-pill"><i class="fa-solid fa-square-root-variable"></i>NumPy</div>
+            <div class="tech-pill"><i class="fa-solid fa-chart-column"></i>Matplotlib</div>
+            <div class="tech-pill"><i class="fa-brands fa-bootstrap"></i>Bootstrap 5</div>
+            <div class="tech-pill"><i class="fa-brands fa-html5"></i>HTML5 &amp; CSS3</div>
+            <div class="tech-pill"><i class="fa-brands fa-js"></i>JavaScript</div>
+            <div class="tech-pill"><i class="fa-solid fa-box-archive"></i>Joblib</div>
+        </div>
+
+        <div class="cta-banner">
+            <div>
+                <h3>Ready to see it in action?</h3>
+                <p>Paste a real news article and get an instant prediction.</p>
+            </div>
+            <a href="{{ url_for('predict_page') }}" class="btn btn-gradient btn-lg">
+                Try the Classifier <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

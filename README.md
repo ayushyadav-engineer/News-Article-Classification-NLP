@@ -1,0 +1,304 @@
+# 📰 News Article Classification using Natural Language Processing (NLP)
+
+A responsive Flask web application that automatically classifies news
+articles into **World**, **Sports**, **Business**, or **Sci/Tech**
+using a Natural Language Processing pipeline and a Machine Learning
+classifier trained with Scikit-Learn.
+
+Built as a Computer Science Engineering mini project to demonstrate a
+complete, end-to-end text classification pipeline — from raw article
+text, through NLP preprocessing and TF-IDF vectorization, to a trained
+model serving live predictions through a Flask web app.
+
+---
+
+## 📌 Table of Contents
+
+- [Overview](#-overview)
+- [Features](#-features)
+- [Technologies Used](#-technologies-used)
+- [Folder Structure](#-folder-structure)
+- [Installation](#-installation)
+- [How to Run](#-how-to-run)
+- [Dataset](#-dataset)
+- [NLP Workflow](#-nlp-workflow)
+- [Machine Learning Model](#-machine-learning-model)
+- [Model Accuracy](#-model-accuracy)
+- [Screenshots](#-screenshots)
+- [Future Scope](#-future-scope)
+- [Author](#-author)
+- [License](#-license)
+
+---
+
+## 🔍 Overview
+
+Manually tagging thousands of news articles by topic is slow and
+inconsistent. This project shows how a classic NLP + Machine Learning
+pipeline can do it automatically and instantly:
+
+1. A user pastes a news article into the web app.
+2. The text is cleaned using an 8-step NLP preprocessing pipeline.
+3. The cleaned text is converted into TF-IDF numeric feature vectors.
+4. A trained Logistic Regression model predicts the most likely
+   category, along with a confidence score.
+
+The whole application runs locally with **no database and no
+authentication** — just Python, Flask, and a trained `.pkl` model.
+
+---
+
+## ✨ Features
+
+- 🎯 Real-time news category prediction with confidence score
+- 📊 Per-category probability breakdown
+- 🖥️ Fully responsive UI (mobile, tablet, laptop, desktop) built with Bootstrap 5
+- 🧭 Modern navbar, hero section, gradient buttons, hover effects, smooth scrolling
+- ⌨️ Live character counter on the article textarea
+- 🎲 "Example News" button to try sample articles per category
+- 🧹 Clear button to reset the input
+- ⏳ Loading spinner while the model runs
+- ⚠️ Friendly error handling (empty input, too-short input, server errors)
+- 📈 Model comparison chart (Logistic Regression vs. Naive Bayes) + confusion matrix
+- 🧩 Clean, modular Flask project structure with template inheritance
+
+---
+
+## 🛠 Technologies Used
+
+**Language:** Python 3.11
+
+**Frontend:** HTML5, CSS3, Bootstrap 5, JavaScript (ES6), Font Awesome, Google Fonts
+
+**Backend:** Flask
+
+**NLP:** NLTK, TF-IDF Vectorizer (Scikit-Learn)
+
+**Machine Learning:** Scikit-Learn — Logistic Regression (primary model), Multinomial Naive Bayes (comparison model)
+
+**Data & Utilities:** Pandas, NumPy, Matplotlib, Joblib
+
+**Dataset:** AG News–style dataset (CSV)
+
+---
+
+## 📁 Folder Structure
+
+```
+News-Article-Classification/
+│
+├── app.py                    # Flask application (routes + API)
+├── train_model.py            # Trains & saves the ML model
+├── predict.py                # Loads model & runs predictions
+├── preprocess.py             # NLP text-cleaning pipeline
+├── config.py                 # Central paths & settings
+├── requirements.txt
+├── README.md
+├── .gitignore
+│
+├── dataset/
+│   └── train.csv             # AG News-style labeled dataset
+│
+├── model/
+│   ├── news_model.pkl        # Best trained classifier
+│   ├── vectorizer.pkl        # Fitted TF-IDF vectorizer
+│   └── label_encoder.pkl     # Category label encoder
+│
+├── static/
+│   ├── css/
+│   │   ├── style.css
+│   │   └── responsive.css
+│   ├── js/
+│   │   └── script.js
+│   └── images/
+│       ├── logo.png
+│       ├── hero.png
+│       ├── workflow.png
+│       └── accuracy.png      # Model comparison + confusion matrix
+│
+├── templates/
+│   ├── base.html              # Shared layout (navbar + footer)
+│   ├── index.html             # Home page
+│   ├── predict.html           # Predict page
+│   └── about.html             # About page
+│
+└── screenshots/
+```
+
+---
+
+## ⚙️ Installation
+
+```bash
+# 1. Clone or extract the project
+cd News-Article-Classification
+
+# 2. (Recommended) Create a virtual environment
+python -m venv venv
+source venv/bin/activate      # On Windows: venv\Scripts\activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+```
+
+NLTK data (`punkt`, `stopwords`, `wordnet`, `omw-1.4`) is downloaded
+automatically the first time `preprocess.py` runs, provided you have
+an internet connection.
+
+---
+
+## ▶️ How to Run
+
+```bash
+# Step 1: Train the model (only needed once, or after changing the dataset)
+python train_model.py
+
+# Step 2: Start the Flask app
+python app.py
+```
+
+Then open your browser at **http://127.0.0.1:5000**
+
+- **Home** — project overview, NLP explainer, workflow, features, tech stack
+- **Predict** — paste an article and get an instant category prediction
+- **About** — dataset details, model comparison, and accuracy charts
+
+---
+
+## 📊 Dataset
+
+The project uses an **AG News–style dataset** (`dataset/train.csv`)
+containing news headlines and short descriptions labeled into four
+categories:
+
+| Category   | Description                              |
+|------------|-------------------------------------------|
+| World      | International politics, conflicts, diplomacy |
+| Sports     | Matches, tournaments, athlete news        |
+| Business   | Markets, companies, the economy           |
+| Sci/Tech   | Research, gadgets, innovation             |
+
+The dataset is balanced across all four categories and includes a
+small amount of natural label ambiguity to reflect real-world
+classification difficulty (e.g. a "tech company earnings" story could
+reasonably sit in either Business or Sci/Tech).
+
+> **Note:** This repository ships with a programmatically generated,
+> AG-News-style dataset so the project runs immediately out of the
+> box. To use the original AG News corpus instead, drop a CSV with
+> `category`, `title`, and `description` columns into `dataset/train.csv`
+> and re-run `train_model.py`.
+
+---
+
+## 🧠 NLP Workflow
+
+The exact same `clean_text()` function in `preprocess.py` is used
+during **both** training and prediction, guaranteeing consistent
+results:
+
+```
+News Article
+     │
+     ▼
+Convert to Lowercase
+     │
+     ▼
+Remove Punctuation
+     │
+     ▼
+Remove Numbers
+     │
+     ▼
+Remove Special Characters
+     │
+     ▼
+Tokenization
+     │
+     ▼
+Stopword Removal
+     │
+     ▼
+Lemmatization
+     │
+     ▼
+TF-IDF Vectorization
+     │
+     ▼
+Machine Learning Model
+     │
+     ▼
+Prediction
+```
+
+---
+
+## 🤖 Machine Learning Model
+
+Two models are trained on identical TF-IDF features and compared:
+
+| Model                     | Role                     |
+|---------------------------|---------------------------|
+| **Logistic Regression**   | Primary model              |
+| **Multinomial Naive Bayes** | Comparison / benchmark   |
+
+`train_model.py` automatically evaluates both on accuracy, precision,
+recall and F1 score, then **saves whichever model performs best** as
+`model/news_model.pkl`, along with the fitted vectorizer and label
+encoder.
+
+---
+
+## 📈 Model Accuracy
+
+On the held-out test split (20% of the dataset):
+
+| Metric     | Logistic Regression | Naive Bayes |
+|------------|:--------------------:|:------------:|
+| Accuracy   | ~94.1%               | ~94.1%       |
+| Precision  | ~94.3%               | ~94.3%       |
+| Recall     | ~94.1%               | ~94.1%       |
+| F1 Score   | ~94.2%               | ~94.2%       |
+
+A full model comparison chart and confusion matrix are generated
+automatically at `static/images/accuracy.png` and displayed on the
+**About** page. Exact numbers will vary slightly if you regenerate the
+dataset or retrain the model.
+
+---
+
+## 📷 Screenshots
+
+Add your own screenshots of the Home, Predict, and About pages here:
+
+```
+screenshots/
+├── home.png
+├── predict.png
+└── about.png
+```
+
+---
+
+## 🚀 Future Scope
+
+- Expand to more granular categories (e.g. Politics, Health, Entertainment)
+- Add support for multi-language news classification
+- Experiment with deep learning models (LSTM, BERT) for higher accuracy
+- Add a REST API key system for external integrations
+- Deploy to a cloud platform (Render, Railway, PythonAnywhere)
+- Add explainability (highlight which words influenced the prediction)
+
+---
+
+## 👤 Author
+
+**Second Year Computer Science Engineering Student**
+Mini Project — Natural Language Processing & Machine Learning
+
+---
+
+## 📄 License
+
+This project is released under the **MIT License** and is intended
+for academic and educational purposes.

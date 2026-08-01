@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}News Article Classification | NLP Mini Project{% endblock %}</title>
+    <meta name="description" content="A machine learning &amp; NLP powered web app that classifies news articles into World, Sports, Business or Sci/Tech.">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar navbar-expand-lg app-navbar sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">
+            <span class="brand-mark"><i class="fa-solid fa-newspaper"></i></span>
+            <span class="brand-text">News<span class="brand-accent">Classify</span></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                <li class="nav-item">
+                    <a class="nav-link {% if active_page == 'home' %}active{% endif %}" href="{{ url_for('index') }}">
+                        <i class="fa-solid fa-house nav-icon"></i>Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if active_page == 'predict' %}active{% endif %}" href="{{ url_for('predict_page') }}">
+                        <i class="fa-solid fa-wand-magic-sparkles nav-icon"></i>Predict
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if active_page == 'about' %}active{% endif %}" href="{{ url_for('about') }}">
+                        <i class="fa-solid fa-circle-info nav-icon"></i>About
+                    </a>
+                </li>
+                <li class="nav-item ms-lg-2">
+                    <a class="btn btn-nav-cta" href="{{ url_for('predict_page') }}">
+                        Try it now <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ===================== PAGE CONTENT ===================== -->
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="app-footer">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-lg-4">
+                <a class="footer-brand" href="{{ url_for('index') }}">
+                    <span class="brand-mark"><i class="fa-solid fa-newspaper"></i></span>
+                    <span class="brand-text">News<span class="brand-accent">Classify</span></span>
+                </a>
+                <p class="footer-desc">
+                    An NLP &amp; Machine Learning mini project that automatically
+                    classifies news articles into World, Sports, Business or
+                    Sci/Tech using TF-IDF and Logistic Regression.
+                </p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-2">
+                <h6 class="footer-heading">Navigate</h6>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('predict_page') }}">Predict</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <h6 class="footer-heading">Categories</h6>
+                <ul class="footer-links">
+                    <li><i class="fa-solid fa-earth-americas footer-icon"></i>World</li>
+                    <li><i class="fa-solid fa-futbol footer-icon"></i>Sports</li>
+                    <li><i class="fa-solid fa-briefcase footer-icon"></i>Business</li>
+                    <li><i class="fa-solid fa-microchip footer-icon"></i>Sci/Tech</li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3">
+                <h6 class="footer-heading">Built With</h6>
+                <div class="footer-stack">
+                    <span>Python</span><span>Flask</span><span>NLTK</span>
+                    <span>Scikit-Learn</span><span>Bootstrap 5</span>
+                </div>
+            </div>
+        </div>
+
+        <hr class="footer-divider">
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> NewsClassify &mdash; Academic Mini Project. Built for learning purposes.</p>
+            <p class="footer-tag">Made with <i class="fa-solid fa-heart text-danger"></i> using Python &amp; NLP</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JS -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

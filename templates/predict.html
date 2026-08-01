@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}Predict | NewsClassify{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <div class="container">
+        <span class="eyebrow"><i class="fa-solid fa-wand-magic-sparkles me-2"></i>Live Prediction</span>
+        <h1>Classify a News Article</h1>
+        <p>Paste any news article below, or try one of the examples, and let
+        the model predict its category in real time.</p>
+    </div>
+</section>
+
+<section class="section-block predict-section">
+    <div class="container">
+        <div class="row gy-4 justify-content-center">
+
+            <!-- ============ INPUT PANEL ============ -->
+            <div class="col-lg-7">
+                <div class="predict-panel">
+                    <div class="predict-panel-header">
+                        <h5><i class="fa-solid fa-file-lines me-2"></i>Article Text</h5>
+                        <div class="example-dropdown dropdown">
+                            <button class="btn btn-example dropdown-toggle" type="button"
+                                    id="exampleBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-shuffle me-1"></i>Example News
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="exampleBtn">
+                                {% for ex in examples %}
+                                <li>
+                                    <a class="dropdown-item" href="#" data-example="{{ ex.text }}">
+                                        <i class="fa-solid fa-tag me-2"></i>{{ ex.category }} example
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <textarea id="articleInput" class="form-control article-textarea" rows="10"
+                        maxlength="3000"
+                        placeholder="Paste a news article here... e.g. 'The central bank raised interest rates today in response to rising inflation concerns...'"></textarea>
+
+                    <div class="predict-panel-footer">
+                        <span class="char-counter"><span id="charCount">0</span> / 3000 characters</span>
+                        <div class="predict-actions">
+                            <button id="clearBtn" class="btn btn-outline-secondary">
+                                <i class="fa-solid fa-eraser me-1"></i>Clear
+                            </button>
+                            <button id="predictBtn" class="btn btn-gradient">
+                                <i class="fa-solid fa-magnifying-glass me-1"></i>Predict Category
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="errorAlert" class="alert alert-danger d-none mt-3" role="alert">
+                        <i class="fa-solid fa-triangle-exclamation me-2"></i><span id="errorMsg"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ RESULT PANEL ============ -->
+            <div class="col-lg-5">
+                <div class="result-panel" id="resultPanel">
+
+                    <!-- Idle state -->
+                    <div id="idleState" class="result-state text-center">
+                        <div class="result-icon-idle"><i class="fa-solid fa-robot"></i></div>
+                        <h5>Waiting for input</h5>
+                        <p>Your prediction will appear here once you classify an article.</p>
+                    </div>
+
+                    <!-- Loading state -->
+                    <div id="loadingState" class="result-state text-center d-none">
+                        <div class="spinner-border loading-spinner" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <h5 class="mt-3">Analyzing article...</h5>
+                        <p>Running the NLP pipeline and ML model</p>
+                    </div>
+
+                    <!-- Result state -->
+                    <div id="resultState" class="result-state d-none">
+                        <div class="result-category-icon" id="categoryIcon">
+                            <i class="fa-solid fa-tag"></i>
+                        </div>
+                        <span class="result-label">Predicted Category</span>
+                        <h2 class="result-category" id="resultCategory">&mdash;</h2>
+
+                        <div class="confidence-block">
+                            <div class="confidence-labels">
+                                <span>Confidence</span>
+                                <span id="confidenceValue">0%</span>
+                            </div>
+                            <div class="progress confidence-progress">
+                                <div id="confidenceBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="prob-breakdown" id="probBreakdown">
+                            <!-- filled dynamically by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Category -> icon + color mapping, used by script.js to render results
+    const CATEGORY_META = {
+        "World":    { icon: "fa-earth-americas", color: "#3a86ff" },
+        "Sports":   { icon: "fa-futbol",          color: "#fb5607" },
+        "Business": { icon: "fa-briefcase",       color: "#ffbe0b" },
+        "Sci/Tech": { icon: "fa-microchip",       color: "#8338ec" }
+    };
+</script>
+{% endblock %}
