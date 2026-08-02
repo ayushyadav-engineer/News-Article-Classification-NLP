@@ -62,10 +62,8 @@ authentication** — just Python, Flask, and a trained `.pkl` model.
 
 | Home | Predict | About |
 |:---:|:---:|:---:|
-| ![Home](screenshots/home.png) | ![Predict](screenshots/predict.png) | ![About](screenshots/about.png) |
+| ![Home](screenshots/home.jpg) | ![Predict](screenshots/predict.jpg) | ![About](screenshots/about.jpg) |
 
-> Add your own screenshots to the `screenshots/` folder using these
-> exact filenames to have them render above.
 
 ---
 
@@ -292,9 +290,9 @@ Add your own screenshots of the app to the `screenshots/` folder:
 
 ```
 screenshots/
-├── home.png
-├── predict.png
-└── about.png
+├── home.jpg
+├── predict.jpg
+└── about.jpg
 ```
 
 ---
