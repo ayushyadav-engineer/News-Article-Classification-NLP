@@ -284,18 +284,6 @@ dataset or retrain the model.
 
 ---
 
-## 📷 Screenshots
-
-Add your own screenshots of the app to the `screenshots/` folder:
-
-```
-screenshots/
-├── home.jpg
-├── predict.jpg
-└── about.jpg
-```
-
----
 
 ## 🚀 Future Scope
 
