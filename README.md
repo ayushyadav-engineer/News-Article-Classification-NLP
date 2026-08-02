@@ -34,7 +34,6 @@
 - [NLP Workflow](#-nlp-workflow)
 - [Machine Learning Model](#-machine-learning-model)
 - [Model Accuracy](#-model-accuracy)
-- [Screenshots](#-screenshots)
 - [Future Scope](#-future-scope)
 - [Author](#-author)
 - [License](#-license)
