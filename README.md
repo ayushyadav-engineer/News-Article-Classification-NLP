@@ -62,7 +62,7 @@ authentication** — just Python, Flask, and a trained `.pkl` model.
 
 | Home | Predict | About |
 |:---:|:---:|:---:|
-| ![Home](screenshots/home.jpg) | ![Predict](screenshots/predict.jpg) | ![About](screenshots/about.jpg) |
+| ![Home](screenshots/Home.jpg) | ![Predict](screenshots/Predict.jpg) | ![About](screenshots/About.jpg) |
 
 
 ---
