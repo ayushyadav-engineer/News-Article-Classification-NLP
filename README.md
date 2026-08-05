@@ -72,7 +72,7 @@ authentication** — just Python, Flask, and a trained `.pkl` model.
 - 📊 Per-category probability breakdown
 - 🖥️ Fully responsive UI (mobile, tablet, laptop, desktop) built with Bootstrap 5
 - 🧭 Modern navbar, hero section, gradient buttons, hover effects, smooth scrolling
-- ⌨️ Live character counter on the article textarea
+- ⌨️ Live character counter on the article text area
 - 🎲 "Example News" button to try sample articles per category
 - 🧹 Clear button to reset the input
 - ⏳ Loading spinner while the model runs
